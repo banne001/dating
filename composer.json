@@ -1,0 +1,12 @@
+{
+  "name": "blezylsa/328/dating",
+  "authors": [
+    {
+      "name": "Blezyl Santos",
+      "email": "bsantos4@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
