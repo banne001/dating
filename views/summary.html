@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Dating</title>
+    <link rel="icon" type="image/png" href="images/favicon.ico">
+
+</head>
+<body>
+<div class="container">
+    <div class="container ">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="">
+                <img src="images/logo.png" class="d-inline-block align-top" alt="">
+                Connect
+            </a>
+        </nav>
+    </div>
+
+    <div class="mx-5">
+        <div class="container border border-bottom">
+            <h1>Personal Information</h1>
+            <div class="row">
+                <div class="col-lg-6 col-12 mx-auto pt-3">
+                    <ul class="list-group">
+                        <li class="list-group-item">Name: {{ @SESSION.fname }} {{ @SESSION.lname }}</li>
+                        <li class="list-group-item">Gender: {{ @SESSION.gender }}</li>
+                        <li class="list-group-item">Age: {{ @SESSION.age }}</li>
+                        <li class="list-group-item">Phone: {{ @SESSION.phone }}</li>
+                        <li class="list-group-item">Email: {{ @SESSION.email }}</li>
+                        <li class="list-group-item">State: {{ @SESSION.state }}</li>
+                        <li class="list-group-item">Seeking: {{ @SESSION.seek }}</li>
+                        <li class="list-group-item">Interests: {{ @SESSION.interests }}</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6 col-12">
+                    <img src="images/profile.png" alt="">
+                    <div>
+                        <h2><small>Biography</small></h2>
+                        <p class="text-center">{{ @SESSION.bio }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-3 align-self-center mx-auto">
+                    <a class="form-control btn btn-danger" type="submit" value="Next" href="{{@BASE}}">Contact Me!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
