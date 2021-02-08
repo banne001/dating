@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Dating</title>
+    <link rel="icon" type="image/png" href="images/favicon.ico">
+
+</head>
+<body>
+<div class="container">
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="{{@BASE}}">
+                <img src="images/logo.png" class="d-inline-block align-top" alt="">
+                Connect
+            </a>
+        </nav>
+    </div>
+    <div class="mx-5">
+        <form action="profile3" method="post" class=" container form-horizontal border border-bottom p-3">
+            <h1>Profile</h1>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6 col-12 mx-auto">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">Example select</label>
+                        <select class="form-control" name="state" id="state">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <fieldset class="form-group">
+                        <legend class="col-form-label ">Seeking</legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="seek" id="male" value="male" checked>
+                            <label class="form-check-label" for="male">
+                                Male
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="seek" id="female" value="female">
+                            <label class="form-check-label" for="female">
+                                Female
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="form-group">
+                        <label for="bio">Biography</label>
+                        <textarea class="form-control" name="bio" id="bio" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                </div>
+                <div class="col-3 align-self-end">
+                    <button class="form-control btn btn-danger" type="submit" value="Next">Next ></button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
