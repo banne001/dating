@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Dating</title>
+    <link rel="icon" type="image/png" href="images/favicon.ico">
+
+</head>
+<body>
+<div class="container">
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="{{@BASE}}">
+                <img src="images/logo.png" class="d-inline-block align-top" alt="">
+                Connect
+            </a>
+        </nav>
+    </div>
+    <div class="mx-5">
+        <form action="summary" method="post" class=" container form-horizontal border border-bottom p-3">
+            <h1>Interests</h1>
+            <hr>
+            <h5>In-door Interests</h5>
+            <div class="row m-3">
+                <br>
+                <repeat group="{{ @indoor }}" value="{{ @interest }}">
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="checkbox" id="{{ @interest }}" name="interests[]" value="{{ @interest }}">
+                        <label class="form-check-label" for="{{ @interest }}"> {{ @interest }}</label>
+                    <br>
+                    </div>
+                </repeat>
+            </div>
+            <h5>Out-door Interests</h5>
+            <div class="row m-3">
+                <br>
+                <repeat group="{{ @outdoor }}" value="{{ @inter }}">
+                    <div class="form-check form-check-inline mx-2">
+                        <input class="form-check-input" type="checkbox" id="{{ @inter }}" name="interests[]" value="{{ @inter }}">
+                        <label class="form-check-label" for="{{ @inter }}"> {{ @inter }}</label>
+                    </div>
+                    <br>
+                </repeat>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                </div>
+                <div class="col-3 align-self-end">
+                    <button class="form-control btn btn-danger" type="submit" value="Next">Next ></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+</body>
+</html>
