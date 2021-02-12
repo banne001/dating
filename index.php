@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * File 328/dating/index.php
+ * File that routes files and display the html that is connected to the route
+ * @author Blezyl Santos
+ */
 //Turn in error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
