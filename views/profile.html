@@ -18,12 +18,12 @@
             </a>
         </nav>
     </div>
-    <div class="mx-5">
+    <div class="mx-5  mt-4">
         <form action="profile2" method="post" class="container form-horizontal border border-bottom p-3">
             <h1>Personal Information</h1>
             <hr>
             <div class="row">
-                <div class="col-lg-6 col-12 mx-auto">
+                <div class="col-lg-7 col-12 mx-auto">
                     <div class="form-group">
                         <label for="fname">First Name</label>
                         <input type="text" class="form-control" name="fname" id="fname" aria-describedby="fname" placeholder="Enter First name">
@@ -38,30 +38,28 @@
                     </div>
                     <fieldset class="form-group">
                         <legend class="col-form-label ">Gender</legend>
-                        <div class="form-check">
+                        <div class="form-check form-check-inline mr-3">
                             <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
                             <label class="form-check-label" for="male">
                                 Male
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check form-check-inline mr-3">
                             <input class="form-check-input" type="radio" name="gender" id="female" value="female">
                             <label class="form-check-label" for="female">
                                 Female
                             </label>
                         </div>
                     </fieldset>
-
-                    <br>
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
                         <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="Enter Phone Number">
                     </div>
                 </div>
-                <div class="col-lg-6 col-12">
-                    <div class="alert alert-secondary" role="alert">
-                        <h6 class="font-weight-bold">Note:</h6> All information entered is protected by our <a href="" class="text-primary">privacy policy</a>.
-                        Profile information can only be viewed by others with your permission.
+                <div class="col-lg-5 col-12">
+                    <div class="alert alert-secondary p-2" role="alert">
+                        <p class="text-center p-0 m-0"><strong>Note:</strong> All information entered is protected by our <a href="" class="text-primary">privacy policy</a>.
+                        Profile information can only be viewed by others with your permission.</p>
                     </div>
                 </div>
             </div>

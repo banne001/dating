@@ -28,8 +28,8 @@ $f3->route('GET|POST /profile', function() {
 
 
 // define a profile email, state, bio, seeking
-$f3 -> route ('POST /profile2', function(){
-    var_dump($_POST);
+$f3 -> route ('POST /profile2', function($f3){
+    //var_dump($_POST);
     // echo "<h1> Hello, Dating </h1>";
     // setting first and last name, age, gender, and phone
     // to session id
@@ -48,6 +48,7 @@ $f3 -> route ('POST /profile2', function(){
     if(isset($_POST['phone'])){
         $_SESSION['phone'] = $_POST['phone'];
     }
+    $f3->set("state", getState());
     $view = new Template();
     echo $view->render("views/profile2.html");
 });
@@ -55,8 +56,8 @@ $f3 -> route ('POST /profile2', function(){
 // define a profile interests
 $f3 -> route ('POST /profile3', function($f3){
     // echo "<h1> Hello, Dating </h1>";
-    var_dump($_POST);
-    var_dump($_SESSION);
+    //var_dump($_POST);
+    //var_dump($_SESSION);
     if(isset($_POST['email'])){
         $_SESSION['email'] = $_POST['email'];
     }
@@ -79,10 +80,10 @@ $f3 -> route ('POST /profile3', function($f3){
 
 // define a profile summary
 $f3 -> route ('POST /summary', function(){
-    var_dump($_POST);
-    var_dump($_SESSION);
+    //var_dump($_POST);
+    //var_dump($_SESSION);
     if(isset($_POST['interests'])){
-        $_SESSION['interests'] = implode(",", $_POST['interests']);
+        $_SESSION['interests'] = implode(", ", $_POST['interests']);
     }
     // echo "<h1> Hello, Dating </h1>";
     $view = new Template();
