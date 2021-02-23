@@ -1,8 +1,12 @@
 <?php
+/*
+ * model/validate.php
+ * Contains validation functions for Dating app
+ */
 /**
  * validName() returns true if is not empty
- * @param $name
- * @return bool
+ * @param $name String  the input to be checked
+ * @return bool true if valid, else false
  */
 function validName($name){
     //$validFood=array("tacos", "eggs". "pizza");
@@ -10,8 +14,8 @@ function validName($name){
 }
 
 /** validAge() returns true if the age is a numeric and between 18 and 118
- * @param $age
- * @return bool
+ * @param $age int  the input to be checked
+ * @return bool true if valid, else false
  */
 function validAge($age)
 {
@@ -19,8 +23,8 @@ function validAge($age)
 }
 
 /** validPhone() returns true if the phone is a valid number
- * @param $phone
- * @return bool
+ * @param $phone String the input to be checked
+ * @return bool true if valid, else false
  */
 function validPhone($phone)
 {
@@ -32,8 +36,8 @@ function validPhone($phone)
 
 /**
  * validEmail() returns true if the email is valid
- * @param $email
- * @return bool
+ * @param $email String input to be checked
+ * @return bool true if valid, else false
  */
 function validEmail($email)
 {
@@ -45,8 +49,8 @@ function validEmail($email)
 
 /**
  * validOutdoor() returns true if the picked outdoor interests is valid
- * @param $outdoor
- * @return bool
+ * @param $outdoor String input to be checked
+ * @return bool true if valid, else false
  */
 function validOutdoor($outdoor)
 {
@@ -61,20 +65,25 @@ function validOutdoor($outdoor)
 
 /**
  * validIndoor() returns true if the picked indoor interests is valid
- * @param $outdoor
- * @return bool
+ * @param $indoor string the input to be checked
+ * @return bool true if valid, else false
  */
-function validIndoor($outdoor)
+function validIndoor($indoor)
 {
     $validIn = getInInterests();
-    foreach ($outdoor as $out){
-        if(!in_array($out, $validIn)){
+    foreach ($indoor as $in){
+        if(!in_array($in, $validIn)){
             return false;
         }
     }
     return true;
 }
 
+/**
+ *
+ * @param $gender string the input to be checked
+ * @return bool  true if valid, else false
+ */
 function validGender($gender){
     if($gender == 'female' || $gender=='male'){
         return true;
@@ -82,7 +91,10 @@ function validGender($gender){
     return false;
 }
 
-
+/**
+ * @param $state string makes sure state is a valid state
+ * @return bool true if valid, else false
+ */
 function validState($state){
     $states = getState();
     return in_array($state, $states);

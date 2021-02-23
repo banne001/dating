@@ -131,6 +131,9 @@ $f3 -> route ('GET|POST /profile3', function($f3){
         if(isset($_POST['interestsOut'])){
             $interestsOut = $_POST['interestsOut'];
             if(validOutdoor($interestsOut)){
+                if(!empty($_SESSION['interests'])){
+                    $_SESSION['interests'] .= ", ";
+                }
                 $_SESSION['interests'] .= implode(", ", $interestsOut);
             } else {
                 $f3->set('error["interestsOut"]', "Go Away, Evildoer");
