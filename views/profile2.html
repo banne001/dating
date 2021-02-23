@@ -25,7 +25,7 @@ Dating Profile2. Gets the email, state, seeking, and bio
         </nav>
     </div>
     <div class="mx-5 mt-4">
-        <form action="profile3" method="post" class=" container form-horizontal border border-bottom p-3">
+        <form action="#" method="post" class=" container form-horizontal border border-bottom p-3">
             <h1>Profile</h1>
             <hr>
             <div class="row">
@@ -33,6 +33,9 @@ Dating Profile2. Gets the email, state, seeking, and bio
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Enter Email">
+                        <check if="{{ isset(@errors['email']) }}">
+                            {{ @errors['email'] }}
+                        </check>
                     </div>
                     <div class="form-group">
                         <label for="state">Select State</label>
@@ -42,6 +45,9 @@ Dating Profile2. Gets the email, state, seeking, and bio
                                 <option value="{{@st}}">{{ @st }}</option>
                             </repeat>
                         </select>
+                        <check if="{{ isset(@errors['state']) }}">
+                            {{ @errors['state'] }}
+                        </check>
                     </div>
                     <fieldset class="form-group ">
                         <legend class="col-form-label ">Seeking</legend>
@@ -57,6 +63,9 @@ Dating Profile2. Gets the email, state, seeking, and bio
                                 Female
                             </label>
                         </div>
+                        <check if="{{ isset(@errors['seek']) }}">
+                            {{ @errors['seek'] }}
+                        </check>
                     </fieldset>
                 </div>
                 <div class="col-lg-6 col-12">

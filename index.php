@@ -94,7 +94,7 @@ $f3 -> route ('GET|POST /profile2', function($f3){
         if(validState($state)){
             $_SESSION['state'] = $state;
         } else {
-            $f3->set('errors["state"]', "Go Away, Evildoer");
+            $f3->set('errors["state"]', "Please pick a state that is provided");
         }
         if(validGender($seek)){
             $_SESSION['seek'] = $_POST['seek'];
@@ -114,10 +114,32 @@ $f3 -> route ('GET|POST /profile2', function($f3){
 });
 
 // define a profile interests
-$f3 -> route ('POST /profile3', function($f3){
+$f3 -> route ('GET|POST /profile3', function($f3){
     // echo "<h1> Hello, Dating </h1>";
     //var_dump($_POST);
     //var_dump($_SESSION);
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_SESSION['interests'] = "";
+        if(isset($_POST['interestsIn'])){
+            $interestsIn = $_POST['interestsIn'];
+            if(validIndoor($interestsIn)){
+                $_SESSION['interests'] .= implode(", ", $interestsIn);
+            } else {
+                $f3->set('errors["interestsIn"]', "Go Away, Evildoer");
+            }
+        }
+        if(isset($_POST['interestsOut'])){
+            $interestsOut = $_POST['interestsOut'];
+            if(validOutdoor($interestsOut)){
+                $_SESSION['interests'] .= implode(", ", $interestsOut);
+            } else {
+                $f3->set('error["interestsOut"]', "Go Away, Evildoer");
+            }
+        }
+        if(empty($f3->get('errors'))) {
+            $f3->reroute('/summary');  //GET
+        }
+    }
 
     $f3->set("indoor", getInInterests());
     $f3->set("outdoor", getOutInterests());
@@ -128,15 +150,12 @@ $f3 -> route ('POST /profile3', function($f3){
 });
 
 // define a profile summary
-$f3 -> route ('POST /summary', function(){
+$f3 -> route ('GET /summary', function(){
     //var_dump($_POST);
     //var_dump($_SESSION);
-    if(isset($_POST['interests'])){
-        $_SESSION['interests'] = implode(", ", $_POST['interests']);
-    }
-    // echo "<h1> Hello, Dating </h1>";
     $view = new Template();
     echo $view->render("views/summary.html");
+    session_destroy();
 });
 
 // run fat free

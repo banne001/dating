@@ -25,7 +25,7 @@ Dating Profile. Gets the outdoor and indoor interests
         </nav>
     </div>
     <div class="mx-5 mt-4">
-        <form action="summary" method="post" class=" container form-horizontal border border-bottom p-3">
+        <form action="#" method="post" class=" container form-horizontal border border-bottom p-3">
             <h1>Interests</h1>
             <hr>
             <h5>In-door Interests</h5>
@@ -33,22 +33,28 @@ Dating Profile. Gets the outdoor and indoor interests
                 <br>
                 <repeat group="{{ @indoor }}" value="{{ @interest }}">
                     <div class="form-check mx-2">
-                        <input class="form-check-input" type="checkbox" id="{{ @interest }}" name="interests[]" value="{{ @interest }}">
+                        <input class="form-check-input" type="checkbox" id="{{ @interest }}" name="interestsIn[]" value="{{ @interest }}">
                         <label class="form-check-label" for="{{ @interest }}"> {{ @interest }}</label>
                     <br>
                     </div>
                 </repeat>
+                <check if="{{ isset(@errors['interestsIn']) }}">
+                    {{ @errors['interestsIn'] }}
+                </check>
             </div>
             <h5>Out-door Interests</h5>
             <div class="row m-3">
                 <br>
                 <repeat group="{{ @outdoor }}" value="{{ @inter }}">
                     <div class="form-check form-check-inline mx-2">
-                        <input class="form-check-input" type="checkbox" id="{{ @inter }}" name="interests[]" value="{{ @inter }}">
+                        <input class="form-check-input" type="checkbox" id="{{ @inter }}" name="interestsOut[]" value="{{ @inter }}">
                         <label class="form-check-label" for="{{ @inter }}"> {{ @inter }}</label>
                     </div>
                     <br>
                 </repeat>
+                <check if="{{ isset(@errors['interestsOut']) }}">
+                    {{ @errors['interestsOut'] }}
+                </check>
             </div>
             <div class="row">
                 <div class="col-9">
