@@ -1,12 +1,19 @@
 <?php
+/*
+ * returns a limited list of indoor interests
+ */
 function getInInterests(){
     return array('tv', 'movies', 'cooking', 'board games', 'puzzles', 'reading', 'playing cards', 'video games');
 }
-
+/*
+ * returns a limited list of outdoor interests
+ */
 function getOutInterests(){
     return array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing');
 }
-
+/*
+ * Returns the states in america
+ */
 function getState(){
     return array(
         'Alabama',
