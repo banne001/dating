@@ -32,49 +32,54 @@ Dating Profile. Gets the name, age, gender, and phone number
                 <div class="col-lg-7 col-12 mx-auto">
                     <div class="form-group">
                         <label for="fname">First Name</label>
-                        <input type="text" class="form-control" name="fname" id="fname" aria-describedby="fname" placeholder="Enter First name">
-                        <check if="{{ isset(@errors['fname']) }}">
+                        <input type="text" class="form-control" name="fname" id="fname" aria-describedby="fname" placeholder="Enter First name" value="{{ @fname }}">
+                        <span class="text-danger"><check if="{{ isset(@errors['fname']) }}">
                             {{ @errors['fname'] }}
-                        </check>
+                        </check></span>
+
                     </div>
                     <div class="form-group">
                         <label for="lname">Last Name</label>
-                        <input type="text" class="form-control" name="lname" id="lname" aria-describedby="lname" placeholder="Enter Last name">
-                        <check if="{{ isset(@errors['lname']) }}">
+                        <input type="text" class="form-control" name="lname" id="lname" aria-describedby="lname" placeholder="Enter Last name" value="{{ @lname }}">
+                        <span class="text-danger"><check if="{{ isset(@errors['lname']) }}">
                             {{ @errors['lname'] }}
-                        </check>
+                        </check></span>
+
                     </div>
                     <div class="form-group">
                         <label for="age">Age</label>
-                        <input type="text" class="form-control" name="age" id="age" aria-describedby="age" placeholder="Enter Age">
-                        <check if="{{ isset(@errors['age']) }}">
+                        <input type="text" class="form-control" name="age" id="age" aria-describedby="age" placeholder="Enter Age" value="{{ @age }}">
+                        <span class="text-danger"><check if="{{ isset(@errors['age']) }}">
                             {{ @errors['age'] }}
-                        </check>
+                        </check></span>
+
                     </div>
                     <fieldset class="form-group">
                         <legend class="col-form-label ">Gender</legend>
                         <div class="form-check form-check-inline mr-3">
-                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" <check if="{{ 'male' == @gender}}"> checked </check>>
                             <label class="form-check-label" for="male">
                                 Male
                             </label>
                         </div>
                         <div class="form-check form-check-inline mr-3">
-                            <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" <check if="{{ 'female' == @gender}}"> checked </check>>
                             <label class="form-check-label" for="female">
                                 Female
                             </label>
                         </div>
-                        <check if="{{ isset(@errors['gender']) }}">
+                        <span class="text-danger"><check if="{{ isset(@errors['gender']) }}">
                             {{ @errors['gender'] }}
-                        </check>
+                        </check></span>
+
                     </fieldset>
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
-                        <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="Enter Phone Number">
-                        <check if="{{ isset(@errors['phone']) }}">
+                        <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="Enter Phone Number" value="{{ @phone }}">
+                        <span class="text-danger"><check if="{{ isset(@errors['phone']) }}">
                             {{ @errors['phone'] }}
-                        </check>
+                        </check></span>
+
                     </div>
                 </div>
                 <div class="col-lg-5 col-12">

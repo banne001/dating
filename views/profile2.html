@@ -32,46 +32,49 @@ Dating Profile2. Gets the email, state, seeking, and bio
                 <div class="col-lg-6 col-12 mx-auto">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Enter Email">
-                        <check if="{{ isset(@errors['email']) }}">
+                        <input type="text" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Enter Email" value="{{ @email }}">
+                        <span class="text-danger"><check if="{{ isset(@errors['email']) }}">
                             {{ @errors['email'] }}
-                        </check>
+                        </check></span>
+
                     </div>
                     <div class="form-group">
                         <label for="state">Select State</label>
                         <select class="form-control" name="state" id="state">
                             <option value="pick">--Pick One--</option>
-                            <repeat group="{{ @state }}" value="{{ @st }}">
-                                <option value="{{@st}}">{{ @st }}</option>
+                            <repeat group="{{ @states }}" value="{{ @st }}">
+                                <option value="{{@st}}" <check if="{{ @st == @state }}"> selected="selected" </check>>{{ @st }}</option>
                             </repeat>
                         </select>
-                        <check if="{{ isset(@errors['state']) }}">
+                        <span class="text-danger"><check if="{{ isset(@errors['state']) }}">
                             {{ @errors['state'] }}
-                        </check>
+                        </check></span>
+
                     </div>
                     <fieldset class="form-group ">
                         <legend class="col-form-label ">Seeking</legend>
                         <div class="form-check form-check-inline mr-3">
-                            <input class="form-check-input" type="radio" name="seek" id="male" value="male" checked>
+                            <input class="form-check-input" type="radio" name="seek" id="male" value="male" <check if="{{ 'male' == @seek }}"> checked </check>>
                             <label class="form-check-label" for="male">
                                 Male
                             </label>
                         </div>
                         <div class="form-check form-check-inline mr-3">
-                            <input class="form-check-input" type="radio" name="seek" id="female" value="female">
+                            <input class="form-check-input" type="radio" name="seek" id="female" value="female" <check if="{{ 'female' == @seek }}"> checked </check>>
                             <label class="form-check-label" for="female">
                                 Female
                             </label>
                         </div>
-                        <check if="{{ isset(@errors['seek']) }}">
+                        <span class="text-danger"><check if="{{ isset(@errors['seek']) }}">
                             {{ @errors['seek'] }}
-                        </check>
+                        </check></span>
+
                     </fieldset>
                 </div>
                 <div class="col-lg-6 col-12">
                     <div class="form-group">
                         <label for="bio">Biography</label>
-                        <textarea class="form-control" name="bio" id="bio" rows="3"></textarea>
+                        <textarea class="form-control" name="bio" id="bio" rows="3" >{{ @bio }}</textarea>
                     </div>
                 </div>
             </div>

@@ -38,9 +38,10 @@ Dating Profile. Gets the outdoor and indoor interests
                     <br>
                     </div>
                 </repeat>
-                <check if="{{ isset(@errors['interestsIn']) }}">
+                <span class="text-danger"><check if="{{ isset(@errors['interestsIn']) }}">
                     {{ @errors['interestsIn'] }}
-                </check>
+                </check></span>
+
             </div>
             <h5>Out-door Interests</h5>
             <div class="row m-3">
@@ -52,9 +53,10 @@ Dating Profile. Gets the outdoor and indoor interests
                     </div>
                     <br>
                 </repeat>
-                <check if="{{ isset(@errors['interestsOut']) }}">
+                <span class="text-danger"><check if="{{ isset(@errors['interestsOut']) }}">
                     {{ @errors['interestsOut'] }}
-                </check>
+                </check></span>
+
             </div>
             <div class="row">
                 <div class="col-9">

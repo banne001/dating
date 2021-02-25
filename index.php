@@ -19,7 +19,7 @@ $f3 = Base::instance();
 $f3-> set('DEBUG', 3);
 
 // define a default route (home page)
-$f3 -> route ('GET /', function(){
+$f3->route ('GET /', function(){
     // echo "<h1> Hello, Dating </h1>";
     $view = new Template();
     echo $view->render("views/home.html");
@@ -63,7 +63,7 @@ $f3->route('GET|POST /profile', function($f3) {
         if(validGender($gender)){
             $_SESSION['gender'] = $gender;
         } else {
-            $f3->set('errors["gender"]', "Go away, Evildoer");
+            $f3->set('errors["gender"]', "Please Select a Gender");
         }
 
         //passed all cases
@@ -71,6 +71,11 @@ $f3->route('GET|POST /profile', function($f3) {
             $f3->reroute('/profile2');  //GET
         }
     }
+    $f3->set('fname', isset($fname) ? $fname: "");
+    $f3->set('lname', isset($lname) ? $lname: "");
+    $f3->set('age', isset($age) ? $age: "");
+    $f3->set('phone', isset($phone) ? $phone: "");
+    $f3->set('gender', isset($gender) ? $gender: "");
     //var_dump($_SESSION);
     $view = new Template();
     echo $view->render("views/profile.html");
@@ -78,13 +83,14 @@ $f3->route('GET|POST /profile', function($f3) {
 
 
 // define a profile email, state, bio, seeking
-$f3 -> route ('GET|POST /profile2', function($f3){
+$f3->route ('GET|POST /profile2', function($f3){
     //var_dump($_POST);
     // echo "<h1> Hello, Dating </h1>";
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $email = $_POST['email'];
         $state = $_POST['state'];
         $seek = $_POST['seek'];
+        $bio = $_POST['bio'];
         if(validEmail($email)){
             $_SESSION['email'] = $email;
         } else {
@@ -99,22 +105,28 @@ $f3 -> route ('GET|POST /profile2', function($f3){
         if(validGender($seek)){
             $_SESSION['seek'] = $_POST['seek'];
         } else {
-            $f3->set('errors["seek"]', "Go Away, Evildoer");
+            $f3->set('errors["seek"]', "Please pick a gender");
         }
 
-        $_SESSION['bio'] = $_POST['bio'];
+        $_SESSION['bio'] = $bio;
         if(empty($f3->get('errors'))) {
             $f3->reroute('/profile3');  //GET
         }
     }
 
-    $f3->set("state", getState());
+    $f3->set("states", getState());
+
+    $f3->set('email', isset($email) ? $email: "");
+    $f3->set('state', isset($state) ? $state: "");
+    $f3->set('seek', isset($seek) ? $seek: "");
+    $f3->set('bio', isset($bio) ? $bio: "");
+
     $view = new Template();
     echo $view->render("views/profile2.html");
 });
 
 // define a profile interests
-$f3 -> route ('GET|POST /profile3', function($f3){
+$f3->route ('GET|POST /profile3', function($f3){
     // echo "<h1> Hello, Dating </h1>";
     //var_dump($_POST);
     //var_dump($_SESSION);
@@ -125,7 +137,7 @@ $f3 -> route ('GET|POST /profile3', function($f3){
             if(validIndoor($interestsIn)){
                 $_SESSION['interests'] .= implode(", ", $interestsIn);
             } else {
-                $f3->set('errors["interestsIn"]', "Go Away, Evildoer");
+                $f3->set('errors["interestsIn"]', "STOP SPOOFING");
             }
         }
         if(isset($_POST['interestsOut'])){
@@ -153,7 +165,7 @@ $f3 -> route ('GET|POST /profile3', function($f3){
 });
 
 // define a profile summary
-$f3 -> route ('GET /summary', function(){
+$f3->route ('GET /summary', function(){
     //var_dump($_POST);
     //var_dump($_SESSION);
     $view = new Template();
