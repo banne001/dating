@@ -43,7 +43,7 @@ Dating Profile2. Gets the email, state, seeking, and bio
                         <select class="form-control" name="state" id="state">
                             <option value="pick">--Pick One--</option>
                             <repeat group="{{ @states }}" value="{{ @st }}">
-                                <option value="{{@st}}" <check if="{{ @st == @state }}"> selected="selected" </check>>{{ @st }}</option>
+                                <option value="{{@st}}" <check if="{{ @st == @state }}"> selected </check>>{{ @st }}</option>
                             </repeat>
                         </select>
                         <span class="text-danger"><check if="{{ isset(@errors['state']) }}">
@@ -54,14 +54,14 @@ Dating Profile2. Gets the email, state, seeking, and bio
                     <fieldset class="form-group ">
                         <legend class="col-form-label ">Seeking</legend>
                         <div class="form-check form-check-inline mr-3">
-                            <input class="form-check-input" type="radio" name="seek" id="male" value="male" <check if="{{ 'male' == @seek }}"> checked </check>>
                             <label class="form-check-label" for="male">
+                                <input class="form-check-input" type="radio" name="seek" id="male" value="male" <check if="{{ 'male' == @seek }}"> checked </check>>
                                 Male
                             </label>
                         </div>
                         <div class="form-check form-check-inline mr-3">
-                            <input class="form-check-input" type="radio" name="seek" id="female" value="female" <check if="{{ 'female' == @seek }}"> checked </check>>
                             <label class="form-check-label" for="female">
+                                <input class="form-check-input" type="radio" name="seek" id="female" value="female" <check if="{{ 'female' == @seek }}"> checked </check>>
                                 Female
                             </label>
                         </div>

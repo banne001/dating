@@ -57,14 +57,14 @@ Dating Profile. Gets the name, age, gender, and phone number
                     <fieldset class="form-group">
                         <legend class="col-form-label ">Gender</legend>
                         <div class="form-check form-check-inline mr-3">
-                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" <check if="{{ 'male' == @gender}}"> checked </check>>
                             <label class="form-check-label" for="male">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="male" <check if="{{ 'male' == @gender}}"> checked </check>>
                                 Male
                             </label>
                         </div>
                         <div class="form-check form-check-inline mr-3">
-                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" <check if="{{ 'female' == @gender}}"> checked </check>>
                             <label class="form-check-label" for="female">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="female" <check if="{{ 'female' == @gender}}"> checked </check>>
                                 Female
                             </label>
                         </div>
@@ -74,13 +74,21 @@ Dating Profile. Gets the name, age, gender, and phone number
 
                     </fieldset>
                     <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="Enter Phone Number" value="{{ @phone }}">
+                        <label for="phone">Phone Number
+                            <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="Enter Phone Number" value="{{ @phone }}">
+                        </label>
                         <span class="text-danger"><check if="{{ isset(@errors['phone']) }}">
                             {{ @errors['phone'] }}
                         </check></span>
-
                     </div>
+                    <fieldset class="form-group">
+                        <legend class="col-form-label">Premium Membership</legend>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="premium" name="premium">
+                            <label class="form-check-label" for="premium"> Sign me up for a Premium Account</label>
+                        </div>
+                    </fieldset>
+
                 </div>
                 <div class="col-lg-5 col-12">
                     <div class="alert alert-secondary p-2" role="alert">

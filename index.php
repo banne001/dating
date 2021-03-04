@@ -8,12 +8,11 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
+
 
 // require the autoload file
 require_once('vendor/autoload.php');
-require_once('model/data-layer.php');
-require_once('model/validation.php');
+session_start();
 // create an instance of the Base class
 $f3 = Base::instance();
 $f3-> set('DEBUG', 3);
@@ -36,38 +35,51 @@ $f3->route('GET|POST /profile', function($f3) {
         $phone = $_POST['phone'];
         $gender = $_POST['gender'];
 
+        if(isset($_POST['premium'])){
+            $member = new PremiumMember();
+        } else {
+            $member = new Member();
+        }
+
         if(validName($fname)){
-            $_SESSION['fname'] = $fname;
+            //$_SESSION['fname'] = $fname;
+            $member->setFname($fname);
         } else {
             $f3->set('errors["fname"]', "First name cannot be blank and must contain only characters");
         }
 
         if(validName($lname)){
-            $_SESSION['lname'] = $lname;
+            //$_SESSION['lname'] = $lname;
+            $member->setLname($lname);
         } else {
             $f3->set('errors["lname"]', "Last name cannot be blank and must contain only characters");
         }
 
         if(validAge($age)){
-            $_SESSION['age'] = $age;
+            //$_SESSION['age'] = $age;
+            $member->setAge($age);
         } else {
             $f3->set('errors["age"]', "Age needs to be numeric and between 18 and 118");
         }
 
         if(validPhone($phone)){
-            $_SESSION['phone'] = $phone;
+            //$_SESSION['phone'] = $phone;
+            $member->setPhone($phone);
         } else {
             $f3->set('errors["phone"]', "Invalid Phone number");
         }
-
-        if(validGender($gender)){
-            $_SESSION['gender'] = $gender;
-        } else {
-            $f3->set('errors["gender"]', "Please Select a Gender");
+        if(isset($gender)){
+            if(validGender($gender)){
+                //$_SESSION['gender'] = $gender;
+                $member->setGender($gender);
+            } else {
+                $f3->set('errors["gender"]', "STOP SPOOFING");
+            }
         }
 
         //passed all cases
         if(empty($f3->get('errors'))) {
+            $SESSION['member'] = $member;
             $f3->reroute('/profile2');  //GET
         }
     }
@@ -97,16 +109,22 @@ $f3->route ('GET|POST /profile2', function($f3){
             $f3->set('errors["email"]', "Invalid Email");
         }
 
-        if(validState($state)){
-            $_SESSION['state'] = $state;
-        } else {
-            $f3->set('errors["state"]', "Please pick a state that is provided");
+        if($state!="pick"){
+            if(validState($state)){
+                $_SESSION['state'] = $state;
+            } else {
+                $f3->set('errors["state"]', "Please pick a state that is provided");
+            }
         }
-        if(validGender($seek)){
-            $_SESSION['seek'] = $_POST['seek'];
-        } else {
-            $f3->set('errors["seek"]', "Please pick a gender");
+
+        if(isset($seek)){
+            if(validGender($seek)){
+                $_SESSION['seek'] = $_POST['seek'];
+            } else {
+                $f3->set('errors["seek"]', "Stop Spoofing");
+            }
         }
+
 
         $_SESSION['bio'] = $bio;
         if(empty($f3->get('errors'))) {
