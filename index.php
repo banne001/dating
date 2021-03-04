@@ -19,7 +19,7 @@ $f3-> set('DEBUG', 3);
 
 $dataLayer = new DataLayer();
 $validator = new Validator($dataLayer);
-
+$member = "";
 // define a default route (home page)
 $f3->route ('GET /', function(){
     // echo "<h1> Hello, Dating </h1>";
@@ -81,13 +81,13 @@ $f3->route('GET|POST /profile', function($f3) {
                 $f3->set('errors["gender"]', "STOP SPOOFING");
             }
         }
-
         //passed all cases
         if(empty($f3->get('errors'))) {
-            $SESSION['member'] = $member;
+            $_SESSION['member'] = $member;
             $f3->reroute('/profile2');  //GET
         }
     }
+    //print_r($member);
     $f3->set('fname', isset($fname) ? $fname: "");
     $f3->set('lname', isset($lname) ? $lname: "");
     $f3->set('age', isset($age) ? $age: "");
@@ -102,21 +102,27 @@ $f3->route('GET|POST /profile', function($f3) {
 // define a profile email, state, bio, seeking
 $f3->route ('GET|POST /profile2', function($f3){
     global $dataLayer;
+    global $validator;
     //var_dump($_POST);
+    echo "THIS IS THE SESSION";
+    var_dump($_SESSION);
     // echo "<h1> Hello, Dating </h1>";
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        echo "Does this is exist";
         $email = $_POST['email'];
         $state = $_POST['state'];
         $seek = $_POST['seek'];
         $bio = $_POST['bio'];
-        if(validEmail($email)){
-            $_SESSION['email'] = $email;
+        if($validator->validEmail($email)){
+            //echo "THIS IS THE $email";
+            //$_SESSION['email'] = $email;
+            $_SESSION['member']->setEmail($email);
         } else {
             $f3->set('errors["email"]', "Invalid Email");
         }
 
         if($state!="pick"){
-            if($dataLayer->validState($state)){
+            if($validator->validState($state)){
                 //$_SESSION['state'] = $state;
                 $_SESSION['member']->setState($state);
             } else {
@@ -125,7 +131,7 @@ $f3->route ('GET|POST /profile2', function($f3){
         }
 
         if(isset($seek)){
-            if($dataLayer->validGender($seek)){
+            if($validator->validGender($seek)){
                 //$_SESSION['seek'] = $_POST['seek'];
                 $_SESSION['member']->setGender($seek);
             } else {
@@ -134,7 +140,10 @@ $f3->route ('GET|POST /profile2', function($f3){
         }
         $_SESSION['bio'] = $bio;
         if(empty($f3->get('errors'))) {
-            $f3->reroute('/profile3');  //GET
+            if(is_a($_SESSION['member'], 'PremiumMember')){
+                $f3->reroute('/profile3');  //GET
+            }
+            $f3->reroute('/summary');
         }
     }
 
@@ -151,6 +160,8 @@ $f3->route ('GET|POST /profile2', function($f3){
 
 // define a profile interests
 $f3->route ('GET|POST /profile3', function($f3){
+    global $dataLayer;
+    global $validator;
     // echo "<h1> Hello, Dating </h1>";
     //var_dump($_POST);
     //var_dump($_SESSION);

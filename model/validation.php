@@ -103,7 +103,7 @@ class Validator{
      */
     function validState($state)
     {
-        $states = getState();
+        $states = $this->_dataLayer->getState();
         return in_array($state, $states);
     }
 }
