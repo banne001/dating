@@ -17,6 +17,9 @@ session_start();
 $f3 = Base::instance();
 $f3-> set('DEBUG', 3);
 
+$dataLayer = new DataLayer();
+$validator = new Validator($dataLayer);
+
 // define a default route (home page)
 $f3->route ('GET /', function(){
     // echo "<h1> Hello, Dating </h1>";
@@ -26,6 +29,8 @@ $f3->route ('GET /', function(){
 
 //Define an create profile route
 $f3->route('GET|POST /profile', function($f3) {
+    global $validator;
+    global $dataLayer;
     // setting first and last name, age, gender, and phone
     // to session id
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -41,35 +46,35 @@ $f3->route('GET|POST /profile', function($f3) {
             $member = new Member();
         }
 
-        if(validName($fname)){
+        if($validator->validName($fname)){
             //$_SESSION['fname'] = $fname;
             $member->setFname($fname);
         } else {
             $f3->set('errors["fname"]', "First name cannot be blank and must contain only characters");
         }
 
-        if(validName($lname)){
+        if($validator->validName($lname)){
             //$_SESSION['lname'] = $lname;
             $member->setLname($lname);
         } else {
             $f3->set('errors["lname"]', "Last name cannot be blank and must contain only characters");
         }
 
-        if(validAge($age)){
+        if($validator->validAge($age)){
             //$_SESSION['age'] = $age;
             $member->setAge($age);
         } else {
             $f3->set('errors["age"]', "Age needs to be numeric and between 18 and 118");
         }
 
-        if(validPhone($phone)){
+        if($validator->validPhone($phone)){
             //$_SESSION['phone'] = $phone;
             $member->setPhone($phone);
         } else {
             $f3->set('errors["phone"]', "Invalid Phone number");
         }
         if(isset($gender)){
-            if(validGender($gender)){
+            if($validator->validGender($gender)){
                 //$_SESSION['gender'] = $gender;
                 $member->setGender($gender);
             } else {
@@ -96,6 +101,7 @@ $f3->route('GET|POST /profile', function($f3) {
 
 // define a profile email, state, bio, seeking
 $f3->route ('GET|POST /profile2', function($f3){
+    global $dataLayer;
     //var_dump($_POST);
     // echo "<h1> Hello, Dating </h1>";
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -110,29 +116,29 @@ $f3->route ('GET|POST /profile2', function($f3){
         }
 
         if($state!="pick"){
-            if(validState($state)){
-                $_SESSION['state'] = $state;
+            if($dataLayer->validState($state)){
+                //$_SESSION['state'] = $state;
+                $_SESSION['member']->setState($state);
             } else {
                 $f3->set('errors["state"]', "Please pick a state that is provided");
             }
         }
 
         if(isset($seek)){
-            if(validGender($seek)){
-                $_SESSION['seek'] = $_POST['seek'];
+            if($dataLayer->validGender($seek)){
+                //$_SESSION['seek'] = $_POST['seek'];
+                $_SESSION['member']->setGender($seek);
             } else {
                 $f3->set('errors["seek"]', "Stop Spoofing");
             }
         }
-
-
         $_SESSION['bio'] = $bio;
         if(empty($f3->get('errors'))) {
             $f3->reroute('/profile3');  //GET
         }
     }
 
-    $f3->set("states", getState());
+    $f3->set("states", $dataLayer->getState());
 
     $f3->set('email', isset($email) ? $email: "");
     $f3->set('state', isset($state) ? $state: "");

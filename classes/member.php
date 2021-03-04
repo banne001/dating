@@ -6,9 +6,11 @@ class Member
     private $_age;
     private $_gender;
     private $_phone;
+    private $_email;
     private $_state;
     private $_seeking;
     private $_bio;
+
 
     /**
      * Member constructor.
@@ -21,16 +23,33 @@ class Member
      * @param $_seeking
      * @param $_bio
      */
-    public function __construct($_fname, $_lname, $_age, $_gender, $_phone, $_state, $_seeking, $_bio)
+    public function __construct($_fname="", $_lname="", $_age="", $_gender="", $_phone="", $_email = "", $_state="", $_seeking="", $_bio="")
     {
         $this->_fname = $_fname;
         $this->_lname = $_lname;
         $this->_age = $_age;
         $this->_gender = $_gender;
         $this->_phone = $_phone;
+        $this->_email = $_email;
         $this->_state = $_state;
         $this->_seeking = $_seeking;
         $this->_bio = $_bio;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getEmail()
+    {
+        return $this->_email;
+    }
+
+    /**
+     * @param mixed|string $email
+     */
+    public function setEmail($email)
+    {
+        $this->_email = $email;
     }
 
     /**

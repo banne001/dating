@@ -4,7 +4,7 @@ class PremiumMember extends Member
     private $_indoorInterests;
     private $_outdoorInterests;
 
-    public function __construct($_fname, $_lname, $_age, $_gender, $_phone, $_state, $_seeking, $_bio, $_indoorInterests, $_outdoorInterests)
+    public function __construct($_fname="", $_lname="", $_age="", $_gender="", $_phone="", $_state="", $_seeking="", $_bio="", $_indoorInterests="", $_outdoorInterests="")
     {
         parent::__construct($_fname, $_lname, $_age, $_gender, $_phone, $_state, $_seeking, $_bio);
         $this->_indoorInterests = $_indoorInterests;
