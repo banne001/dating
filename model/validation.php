@@ -3,7 +3,8 @@
  * model/validate.php
  * Contains validation functions for Dating app
  */
-class Validator{
+class Validator
+{
     private $_dataLayer;
     function __construct($dataLayer){
         $this->_dataLayer = $dataLayer;
@@ -59,7 +60,7 @@ class Validator{
      */
     function validOutdoor($outdoor)
     {
-        $validOut = getOutInterests();
+        $validOut = $this->_dataLayer->getOutInterests();
         foreach ($outdoor as $out) {
             if (!in_array($out, $validOut)) {
                 return false;
@@ -75,7 +76,7 @@ class Validator{
      */
     function validIndoor($indoor)
     {
-        $validIn = getInInterests();
+        $validIn = $this->_dataLayer->getInInterests();
         foreach ($indoor as $in) {
             if (!in_array($in, $validIn)) {
                 return false;

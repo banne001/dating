@@ -133,12 +133,12 @@ $f3->route ('GET|POST /profile2', function($f3){
         if(isset($seek)){
             if($validator->validGender($seek)){
                 //$_SESSION['seek'] = $_POST['seek'];
-                $_SESSION['member']->setGender($seek);
+                $_SESSION['member']->setSeeking($seek);
             } else {
                 $f3->set('errors["seek"]', "Stop Spoofing");
             }
         }
-        $_SESSION['bio'] = $bio;
+        $_SESSION['member']->setBio($bio);
         if(empty($f3->get('errors'))) {
             if(is_a($_SESSION['member'], 'PremiumMember')){
                 $f3->reroute('/profile3');  //GET
@@ -166,22 +166,20 @@ $f3->route ('GET|POST /profile3', function($f3){
     //var_dump($_POST);
     //var_dump($_SESSION);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $_SESSION['interests'] = "";
         if(isset($_POST['interestsIn'])){
             $interestsIn = $_POST['interestsIn'];
-            if(validIndoor($interestsIn)){
-                $_SESSION['interests'] .= implode(", ", $interestsIn);
+            if($validator->validIndoor($interestsIn)){
+                //$_SESSION['interests'] .= implode(", ", $interestsIn);
+                $_SESSION['member']->setIndoorInterests(implode(", ", $interestsIn));
             } else {
                 $f3->set('errors["interestsIn"]', "STOP SPOOFING");
             }
         }
         if(isset($_POST['interestsOut'])){
             $interestsOut = $_POST['interestsOut'];
-            if(validOutdoor($interestsOut)){
-                if(!empty($_SESSION['interests'])){
-                    $_SESSION['interests'] .= ", ";
-                }
-                $_SESSION['interests'] .= implode(", ", $interestsOut);
+            if($validator->validOutdoor($interestsOut)){
+                $_SESSION['member']->setOutdoorInterests(implode(", ", $interestsOut));
+                //$_SESSION['interests'] .= implode(", ", $interestsOut);
             } else {
                 $f3->set('error["interestsOut"]', "Go Away, Evildoer");
             }
@@ -191,8 +189,8 @@ $f3->route ('GET|POST /profile3', function($f3){
         }
     }
 
-    $f3->set("indoor", getInInterests());
-    $f3->set("outdoor", getOutInterests());
+    $f3->set("indoor", $dataLayer->getInInterests());
+    $f3->set("outdoor", $dataLayer->getOutInterests());
 
     $view = new Template();
     echo $view->render("views/profile3.html");
