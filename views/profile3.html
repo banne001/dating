@@ -25,7 +25,7 @@ Dating Profile. Gets the outdoor and indoor interests
         </nav>
     </div>
     <div class="mx-5 mt-4">
-        <form action="#" method="post" class=" container form-horizontal border border-bottom p-3">
+        <form action="#" method="post" class=" container form-horizontal border border-bottom p-3" enctype="multipart/form-data">
             <h1>Interests</h1>
             <hr>
             <h5>In-door Interests</h5>
@@ -57,6 +57,14 @@ Dating Profile. Gets the outdoor and indoor interests
                     {{ @errors['interestsOut'] }}
                 </check></span>
 
+            </div>
+            <h5>Upload your Profile Picture!</h5>
+            <div class="row m-3">
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <br>
+                <span class="text-danger"><check if="{{ isset(@errors['pics']) }}">
+                    {{ @errors['pics'] }}
+                </check></span>
             </div>
             <div class="row">
                 <div class="col-9">

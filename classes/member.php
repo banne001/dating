@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * Class Member
+ * A class to set all user details such as name, age, gender, phone, email,
+ * state, seeking, and bio
+ * classes/member.php
+ * @author Blezyl Santos
+ * @version 2.0
+ */
 class Member
 {
     private $_fname;
@@ -14,14 +23,14 @@ class Member
 
     /**
      * Member constructor.
-     * @param $_fname
-     * @param $_lname
-     * @param $_age
-     * @param $_gender
-     * @param $_phone
-     * @param $_state
-     * @param $_seeking
-     * @param $_bio
+     * @param $_fname string first name
+     * @param $_lname string last name
+     * @param $_age string age
+     * @param $_gender string gender
+     * @param $_phone string phone number
+     * @param $_state string state
+     * @param $_seeking string seeking
+     * @param $_bio string bio
      */
     public function __construct($_fname="", $_lname="", $_age="", $_gender="", $_phone="", $_email = "", $_state="", $_seeking="", $_bio="")
     {
@@ -37,7 +46,7 @@ class Member
     }
 
     /**
-     * @return mixed|string
+     * @return string get the email
      */
     public function getEmail()
     {
@@ -45,7 +54,7 @@ class Member
     }
 
     /**
-     * @param mixed|string $email
+     * @param string sets $email
      */
     public function setEmail($email)
     {
@@ -53,7 +62,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return string gets first name
      */
     public function getFname()
     {
@@ -61,7 +70,7 @@ class Member
     }
 
     /**
-     * @param mixed $fname
+     * @param string sets $fname
      */
     public function setFname($fname)
     {
@@ -69,7 +78,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return string get last name
      */
     public function getLname()
     {
@@ -77,7 +86,7 @@ class Member
     }
 
     /**
-     * @param mixed $lname
+     * @param string sets $lname
      */
     public function setLname($lname)
     {
@@ -85,7 +94,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return string get age
      */
     public function getAge()
     {
@@ -93,7 +102,7 @@ class Member
     }
 
     /**
-     * @param mixed $age
+     * @param string set $age
      */
     public function setAge($age)
     {
@@ -101,7 +110,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return string get gender
      */
     public function getGender()
     {
@@ -109,7 +118,7 @@ class Member
     }
 
     /**
-     * @param mixed $gender
+     * @param string set $gender
      */
     public function setGender($gender)
     {
@@ -117,7 +126,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return string gets phone number
      */
     public function getPhone()
     {
@@ -125,7 +134,7 @@ class Member
     }
 
     /**
-     * @param mixed $phone
+     * @param string sets $phone
      */
     public function setPhone($phone)
     {
@@ -133,7 +142,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return string gets state
      */
     public function getState()
     {
@@ -141,7 +150,7 @@ class Member
     }
 
     /**
-     * @param mixed $state
+     * @param string sets $state
      */
     public function setState($state)
     {
@@ -149,7 +158,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return string get seeking gender
      */
     public function getSeeking()
     {
@@ -157,7 +166,7 @@ class Member
     }
 
     /**
-     * @param mixed $seeking
+     * @param string sets $seeking
      */
     public function setSeeking($seeking)
     {
@@ -165,7 +174,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return string get bio
      */
     public function getBio()
     {
@@ -173,7 +182,7 @@ class Member
     }
 
     /**
-     * @param mixed $bio
+     * @param string sets $bio
      */
     public function setBio($bio)
     {

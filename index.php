@@ -104,11 +104,9 @@ $f3->route ('GET|POST /profile2', function($f3){
     global $dataLayer;
     global $validator;
     //var_dump($_POST);
-    echo "THIS IS THE SESSION";
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
     // echo "<h1> Hello, Dating </h1>";
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        echo "Does this is exist";
         $email = $_POST['email'];
         $state = $_POST['state'];
         $seek = $_POST['seek'];
@@ -162,7 +160,6 @@ $f3->route ('GET|POST /profile2', function($f3){
 $f3->route ('GET|POST /profile3', function($f3){
     global $dataLayer;
     global $validator;
-    // echo "<h1> Hello, Dating </h1>";
     //var_dump($_POST);
     //var_dump($_SESSION);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -181,9 +178,37 @@ $f3->route ('GET|POST /profile3', function($f3){
                 $_SESSION['member']->setOutdoorInterests(implode(", ", $interestsOut));
                 //$_SESSION['interests'] .= implode(", ", $interestsOut);
             } else {
-                $f3->set('error["interestsOut"]', "Go Away, Evildoer");
+                $f3->set('errors["interestsOut"]', "Go Away, Evildoer");
             }
         }
+        //echo $_FILES['fileToUpload']['name'];
+        if(!empty($_FILES['fileToUpload']['name'])){
+            $fileName = $_FILES['fileToUpload']['name'];
+            $fileNameCmps = explode(".", $fileName);
+            $fileExtension = strtolower(end($fileNameCmps));
+            if($validator->validExtension($fileExtension)==true) {
+                //File Details
+                //$fileSize = $_FILES['fileToUpload']['size'];
+                //$fileType = $_FILES['fileToUpload']['type'];
+                $fileTmpPath = $_FILES['fileToUpload']['tmp_name'];
+
+                //sanitize file name
+                $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+                $uploadFileDir = 'images/';
+                $dest_path = $uploadFileDir . $newFileName;
+                $_SESSION['member']->setProfilePic($dest_path);
+                if(move_uploaded_file($fileTmpPath, $dest_path)) {
+                    echo 'File is successfully uploaded.';
+                }
+                else {
+                    echo 'There was some error moving the file to upload directory. Please make sure the upload directory is writable by web server.';
+                }
+                //var_dump($_SESSION);
+            } else {
+                $f3->set('errors["pics"]', "Invalid file type");
+            }
+        }
+
         if(empty($f3->get('errors'))) {
             $f3->reroute('/summary');  //GET
         }

@@ -107,4 +107,15 @@ class Validator
         $states = $this->_dataLayer->getState();
         return in_array($state, $states);
     }
+
+    /**
+     * @param $ext String type of file
+     * @return bool true if the file is a picture
+     */
+    function validExtension($ext)
+    {
+
+        $extensions = $this->_dataLayer->getExtensions();
+        return in_array($ext, $extensions);
+    }
 }

@@ -39,13 +39,20 @@ Dating Profile Summary. Displays all information from previous profile forms
                         <li class="list-group-item">State: {{ @SESSION.member->getState() }}</li>
                         <li class="list-group-item">Seeking: {{ @SESSION.member->getSeeking() }}</li>
                         <check if="{{ is_a(@SESSION.member, 'PremiumMember') }}">
-                            <li class="list-group-item">Interests: {{ @SESSION.member->getIndoorInterests() }}, {{ @SESSION.member->getOutdoorInterests() }}</li>
+                            <li class="list-group-item">Interests: {{ @SESSION.member->getIndoorInterests() }}
+                                <check if="{{ empty(@SESSION.member->getIndoorInterests())==false && empty(@SESSION.member->getOutdoorInterests())==false }}">, </check>
+                                {{ @SESSION.member->getOutdoorInterests() }}</li>
                         </check>
                     </ul>
                 </div>
 
                 <div class="col-lg-6 col-12">
-                    <img class="rounded" src="images/profile.png" alt="">
+                    <img class="rounded" src=
+                        <check if="{{ is_a(@SESSION.member, 'PremiumMember') }}">
+                                <true>"{{ @SESSION.member->getProfilePic() }}"</true>
+                                <false>"images/profile.png"</false>
+                        </check>
+                    alt="Profile pic">
                     <div>
                         <h2><small>Biography</small></h2>
                         <p class="text-center">{{ @SESSION.member->getBio() }}</p>
