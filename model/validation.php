@@ -118,4 +118,16 @@ class Validator
         $extensions = $this->_dataLayer->getExtensions();
         return in_array($ext, $extensions);
     }
+
+    /**
+     * @param $username String username to be checked
+     * @param $password String password to be checked
+     * @return bool if the username and password is valid
+     */
+    function validLogin($username, $password){
+        $adminUser = 'admin';
+        $adminPassword = '@dm1n';
+        return $username == $adminUser && $password == $adminPassword;
+
+    }
 }

@@ -18,6 +18,10 @@ class DataLayer
         $this->_dbh = $_dbh;
     }
 
+    /**
+     * add the new created member in the database
+     * @param $member object the member to be added
+     */
     function insertMember($member){
 
         $sql = "INSERT INTO member(`fname`, `lname`, `age`, `gender`, `phone`, `email`, `state`, `seeking`, `bio`, `premium`, `interests`, `image`) VALUES 
@@ -26,15 +30,6 @@ class DataLayer
         //prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
-        $fname = $member->getFname();
-        $lname = $member->getLname();
-        $age = $member->getAge();
-        $gender = $member->getGender();
-        $phone = $member->getPhone();
-        $email = $member->getEmail();
-        $states = $member->getState();
-        $seeking = $member->getSeeking();
-        $bio = $member->getBio();
         if($member instanceof PremiumMember){
             $premium = 1;
             $interests = $member->getIndoorInterests();
@@ -50,15 +45,15 @@ class DataLayer
             $image = "";
         }
 
-        $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
-        $statement->bindParam(':lname', $lname, PDO::PARAM_STR);
-        $statement->bindParam(':age', $age, PDO::PARAM_INT);
-        $statement->bindParam(':gender', $gender, PDO::PARAM_STR);
-        $statement->bindParam(':phone', $phone, PDO::PARAM_INT);
-        $statement->bindParam(':email', $email, PDO::PARAM_STR);
-        $statement->bindParam(':states', $states, PDO::PARAM_STR);
-        $statement->bindParam(':seeking', $seeking, PDO::PARAM_STR);
-        $statement->bindParam(':bio', $bio, PDO::PARAM_STR);
+        $statement->bindParam(':fname', $member->getFname(), PDO::PARAM_STR);
+        $statement->bindParam(':lname', $member->getLname(), PDO::PARAM_STR);
+        $statement->bindParam(':age', $member->getAge(), PDO::PARAM_INT);
+        $statement->bindParam(':gender', $member->getGender(), PDO::PARAM_STR);
+        $statement->bindParam(':phone', $member->getPhone(), PDO::PARAM_INT);
+        $statement->bindParam(':email', $member->getEmail(), PDO::PARAM_STR);
+        $statement->bindParam(':states', $member->getState(), PDO::PARAM_STR);
+        $statement->bindParam(':seeking', $member->getSeeking(), PDO::PARAM_STR);
+        $statement->bindParam(':bio', $member->getBio(), PDO::PARAM_STR);
         $statement->bindParam(':premium', $premium, PDO::PARAM_BOOL);
         $statement->bindParam(':interests', $interests, PDO::PARAM_STR);
         $statement->bindParam(':image', $image, PDO::PARAM_STR);
@@ -67,6 +62,10 @@ class DataLayer
         //print_r($member);
         //echo '<p>Added the Table</p>';
     }
+    /**
+     * Displays all the members
+     * @return object displays all the member
+     */
     function getMembers(){
         $sql = "SELECT * FROM member";
 
@@ -78,6 +77,10 @@ class DataLayer
 
 
     }
+    /**
+     * Displays a specific member
+     * @return object the specific member
+     */
     function getMember($member_id){
         $sql = "SELECT * FROM member WHERE :member_id";
 
@@ -88,6 +91,12 @@ class DataLayer
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Gets the interests of a specific member
+     * @param $member_id int the id of the member
+     * @return mixed object the interests of a specific member
+     */
     function getInterests($member_id){
         $sql = "SELECT interests FROM member WHERE :member_id";
 
