@@ -12,12 +12,14 @@ error_reporting(E_ALL);
 
 // require the autoload file
 require_once('vendor/autoload.php');
+require $_SERVER['DOCUMENT_ROOT'].'/../config.php';
+
 session_start();
 // create an instance of the Base class
 $f3 = Base::instance();
 $f3-> set('DEBUG', 3);
 
-$dataLayer = new DataLayer();
+$dataLayer = new DataLayer($dbh);
 $validator = new Validator($dataLayer);
 $member = "";
 // define a default route (home page)
@@ -226,10 +228,55 @@ $f3->route ('GET|POST /profile3', function($f3){
 $f3->route ('GET /summary', function(){
     //var_dump($_POST);
     //var_dump($_SESSION);
+    global $dataLayer;
+    $dataLayer->insertMember($_SESSION['member']);
     $view = new Template();
     echo $view->render("views/summary.html");
     session_destroy();
 });
 
+$f3->route('GET|POST /admin', function($f3){
+    global $validator;
+    // if he form has been submitted
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        //echo "Form has beem submitted";
+        // Get the username and password
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        // if they are correct
+        if($validator->validLogin($username, $password)){
+            //echo "Login is correct";
+            // redirect to index page
+            $_SESSION['loggedin'] = true;
+            $f3->reroute('/profiles');
+        }
+        // Set an error flag
+        $f3->set('errors["usernameL"]', $username);
+        $f3->set('errors["login"]', true);
+    }
+    $view = new Template();
+    echo $view->render("views/admin.html");
+});
+
+// define a profile summary
+$f3->route ('GET /profiles', function($f3){
+    //var_dump($_POST);
+    //var_dump($_SESSION);
+    if (!isset($_SESSION['loggedin'])) {
+        //Redirect to home
+        $f3->reroute('/admin');
+    }
+    global $dataLayer;
+    $members = $dataLayer->getMembers();
+    $f3->set('member', $members);
+    $view = new Template();
+    echo $view->render("views/allProfiles.html");
+});
+
+$f3->route('GET /logout', function($f3){
+    session_destroy();
+    $_SESSION = array();
+    $f3->reroute('/');
+});
 // run fat free
 $f3->run();
