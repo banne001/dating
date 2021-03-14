@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="icon" type="image/png" href="images/favicon.ico">
+    <title>Profile Summary</title>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{{@BASE}}">
+            <img src="images/logo.png" class="d-inline-block align-top" alt="">
+            Connect
+        </a>
+        <a href="logout" class="text-dark">Logout</a>
+
+    </nav>
+</div>
+<div class="container">
+    <h1>All Profiles</h1>
+    <table id="myTable" class="display" style="width:100%;">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Age</td>
+                <td>Phone</td>
+                <td>Email</td>
+                <td>State</td>
+                <td>Gender</td>
+                <td>Seeking</td>
+                <td>Premium</td>
+                <td>Interests</td>
+            </tr>
+        </thead>
+        <tbody>
+            <repeat group="{{ @member }}" value="{{ @data }}">
+                <tr>
+                    <td>{{ @data['member_id'] }}</td>
+                    <td>{{ @data['fname'] . " " . @data['lname'] }}</td>
+                    <td>{{ @data['age'] }}</td>
+                    <td>{{ @data['phone'] }}</td>
+                    <td>{{ @data['email'] }}</td>
+                    <td>{{ @data['state'] }}</td>
+                    <td>{{ @data['gender'] }}</td>
+                    <td>{{ @data['seeking'] }}</td>
+                    <td class='text-center'>
+                        <check if=" {{ @data['premium'] == 1 }} ">
+                            <true>
+                                <input type='checkbox' class='premium' id="{{ @data['member_id'] }}" checked >
+                            </true>
+                            <false>
+                                <input type='checkbox' class='premium' id="{{ @data['member_id'] }}" >
+                            </false>
+                        </check>
+                    </td>
+                    <td>{{ @data['interests'] }}</td>
+                </tr>
+            </repeat>
+        </tbody>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script>
+
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+    $('#myTable').DataTable( {
+        "order": [[ 0, "desc" ]],
+        "scrollX": true
+    } );
+</script>
+</body>
+</html>

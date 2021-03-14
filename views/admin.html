@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Dating</title>
+    <link rel="icon" type="image/png" href="images/favicon.ico">
+
+</head>
+<body>
+<!-- NavBar -->
+
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{{@BASE}}">
+            <img src="images/logo.png" class="d-inline-block align-top" alt="">
+            Connect
+        </a>
+    </nav>
+</div>
+<div class="container">
+
+    <h1>Login Page</h1>
+
+    <form action="#" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username"
+                <check if="{{ isset(@errors['usernameL']) }}">value={{ @errors['usernameL'] }}</check>
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" >
+        </div>
+
+        <check if="{{ @errors['login'] == true}} "><span class="text-danger">Incorrect Login</span></check>
+        <br>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+</div>
+
+</body>
+</html>
